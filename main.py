@@ -25,6 +25,8 @@ class recordingGUI(QtWidgets.QMainWindow, recorderUI.Ui_MainWindow):
         self.comboBox.currentIndexChanged.connect(self.initVideoWriter)
         self.lineEdit.textEdited.connect(self.initVideoWriter)
 
+        self.pushButton.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid green; ")
+        self.pushButton_2.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid red; ")
         self.pushButton.pressed.connect(self.monitorScreen)
         self.pushButton_2.pressed.connect(self.stopRecording)
 
