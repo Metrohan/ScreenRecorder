@@ -3,10 +3,12 @@ import cv2
 import numpy as np
 import sys
 import os.path
+import time
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import QTimer
 
 import recorderUI
 
@@ -25,13 +27,16 @@ class recordingGUI(QtWidgets.QMainWindow, recorderUI.Ui_MainWindow):
         self.comboBox.currentIndexChanged.connect(self.initVideoWriter)
         self.lineEdit.textEdited.connect(self.initVideoWriter)
 
-        self.pushButton.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid green; ")
-        self.pushButton_2.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid red; ")
+        self.pushButton.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid red; ")
+        self.pushButton_2.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid green; ")
         self.pushButton.pressed.connect(self.monitorScreen)
         self.pushButton_2.pressed.connect(self.stopRecording)
 
-        global onLive
-        onLive = 0
+        self.onLive = 0
+        self.startTimer = 0
+
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.updateTimer)
 
     def createFolder(self):
         record_folder = os.path.expanduser("~\\Documents\\ScreenRecorder")
@@ -54,15 +59,18 @@ class recordingGUI(QtWidgets.QMainWindow, recorderUI.Ui_MainWindow):
         self.recordScreen()
 
     def recordScreen(self):
+        self.startTimer = 0
         self.onLive = 1
+
         self.pushButton.hide()
         self.pushButton_2.show()
+
         resolution = (self.width, self.height)
         codec = cv2.VideoWriter_fourcc(*'mp4v')
         filename = f"{self.prefName}" + '.mp4'
-        fps = 30.0
 
-        self.out = cv2.VideoWriter(filename, codec, fps, resolution)
+        self.out = cv2.VideoWriter(filename, codec, 30.0, resolution)
+        self.timer.start(1000)
         while self.onLive == 1:
             img = pyautogui.screenshot()
             frame = np.array(img)
@@ -75,10 +83,18 @@ class recordingGUI(QtWidgets.QMainWindow, recorderUI.Ui_MainWindow):
                 break
 
     def stopRecording(self):
+        self.startTimer = 0
+        self.label_2.setText("00:00:00")
+        self.timer.stop()
         self.out.release()
         cv2.destroyAllWindows()
         self.pushButton.show()
         self.pushButton_2.hide()
+
+    def updateTimer(self):
+        if self.onLive:
+            self.startTimer += 1
+            self.label_2.setText(time.strftime("%H:%M:%S", time.gmtime(self.startTimer)))
 
 
 def main():
