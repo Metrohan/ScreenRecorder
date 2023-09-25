@@ -1,106 +1,39 @@
-import pyautogui
-import cv2
-import numpy as np
 import sys
-import os.path
-import time
 
 from PyQt5.QtWidgets import QApplication
-from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QTimer
 
 import recorderUI
+import recording
+from tray import systemTray
 
 
-class recordingGUI(QtWidgets.QMainWindow, recorderUI.Ui_MainWindow):
+class RecordingGUI(QMainWindow, recorderUI.Ui_MainWindow):
     def __init__(self):
         super().__init__()
 
         self.setupUi(self)
         self.show()
+        self.setFixedSize(475, 400)
 
-        self.initVideoWriter()
-        self.createFolder()
-        self.recordLocation()
+        self.recording = recording.Recording(self)
 
-        self.comboBox.currentIndexChanged.connect(self.initVideoWriter)
-        self.lineEdit.textEdited.connect(self.initVideoWriter)
+        self.comboBox.currentIndexChanged.connect(self.recording.initVideoWriter)
+        self.lineEdit.textEdited.connect(self.recording.initVideoWriter)
 
         self.pushButton.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid red; ")
         self.pushButton_2.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid green; ")
-        self.pushButton.pressed.connect(self.monitorScreen)
-        self.pushButton_2.pressed.connect(self.stopRecording)
+        self.pushButton.pressed.connect(self.recording.startRecording)
+        self.pushButton_2.pressed.connect(self.recording.stopRecording)
 
-        self.onLive = 0
-        self.startTimer = 0
-
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.updateTimer)
-
-    def createFolder(self):
-        record_folder = os.path.expanduser("~\\Documents\\ScreenRecorder")
-        if not os.path.exists(record_folder):
-            os.mkdir(record_folder)
-
-    def recordLocation(self):
-        self.record_folder = os.path.expanduser("~\\Documents\\ScreenRecorder")
-        path = os.path.join(self.record_folder)
-        os.chdir(path)
-
-    def initVideoWriter(self):
-        prefRes = self.comboBox.currentText()  # preferred resolution
-        self.width, self.height = map(int, prefRes.split('x'))
-        self.prefName = self.lineEdit.text()
-
-    def monitorScreen(self):
-        cv2.namedWindow("Monitor", cv2.WINDOW_NORMAL)
-        cv2.resizeWindow("Monitor", 480, 270)
-        self.recordScreen()
-
-    def recordScreen(self):
-        self.startTimer = 0
-        self.onLive = 1
-
-        self.pushButton.hide()
-        self.pushButton_2.show()
-
-        resolution = (self.width, self.height)
-        codec = cv2.VideoWriter_fourcc(*'mp4v')
-        filename = f"{self.prefName}" + '.mp4'
-
-        self.out = cv2.VideoWriter(filename, codec, 30.0, resolution)
-        self.timer.start(1000)
-        while self.onLive == 1:
-            img = pyautogui.screenshot()
-            frame = np.array(img)
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            self.out.write(frame)
-            cv2.imshow('Monitor', frame)
-            if cv2.waitKey(1) == ord('p'):
-                self.onLive = 0
-                self.stopRecording()
-                break
-
-    def stopRecording(self):
-        self.startTimer = 0
-        self.label_2.setText("00:00:00")
-        self.timer.stop()
-        self.out.release()
-        cv2.destroyAllWindows()
-        self.pushButton.show()
-        self.pushButton_2.hide()
-
-    def updateTimer(self):
-        if self.onLive:
-            self.startTimer += 1
-            self.label_2.setText(time.strftime("%H:%M:%S", time.gmtime(self.startTimer)))
+        self.recording.createFolder()
+        self.recording.recordLocation()
 
 
 def main():
     app = QApplication(sys.argv)
-    main_widget = recordingGUI()
-    main_widget.show()
+    main_window = RecordingGUI()
+    main_window.show()
     sys.exit(app.exec_())
 
 
