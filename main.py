@@ -1,11 +1,8 @@
 import sys
-
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWidgets import *
-
+from PyQt5.QtWidgets import QApplication, QMainWindow
+import countdown
 import recorderUI
 import recording
-from tray import systemTray
 
 
 class RecordingGUI(QMainWindow, recorderUI.Ui_MainWindow):
