@@ -4,6 +4,7 @@ import numpy as np
 import os.path
 import time
 
+from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QTimer
 from tray import systemTray
 
@@ -15,7 +16,6 @@ class Recording:
         self.timer = QTimer(self.main_window)
         self.timer.timeout.connect(self.updateTimer)
         self.out = None
-
 
     def trayInit(self):
         self.onLive = False
@@ -44,7 +44,7 @@ class Recording:
         self.main_window.pushButton_2.show()
 
         resolution = (self.width, self.height)
-        codec = cv2.VideoWriter_fourcc(*'mp4v')
+        codec = cv2.VideoWriter_fourcc(*'mp4g')
         filename = f"{self.prefName}" + '.mp4'
 
         self.out = cv2.VideoWriter(filename, codec, 30.0, resolution)
@@ -80,3 +80,12 @@ class Recording:
             self.startTimer += 1
             self.main_window.label_2.setText(time.strftime("%H:%M:%S", time.gmtime(self.startTimer)))
 
+    def countdown(self):
+        t = 5
+        while t != -1:
+            self.main_window.label_3.setText(str(t))
+            QApplication.processEvents()
+            time.sleep(1)
+            t -= 1
+
+        self.startRecording()

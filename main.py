@@ -1,11 +1,8 @@
 import sys
-
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWidgets import *
-
+from PyQt5.QtWidgets import QApplication, QMainWindow
+import filePath
 import recorderUI
 import recording
-from tray import systemTray
 
 
 class RecordingGUI(QMainWindow, recorderUI.Ui_MainWindow):
@@ -23,8 +20,9 @@ class RecordingGUI(QMainWindow, recorderUI.Ui_MainWindow):
 
         self.pushButton.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid red; ")
         self.pushButton_2.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid green; ")
-        self.pushButton.pressed.connect(self.recording.startRecording)
+        self.pushButton.pressed.connect(self.recording.countdown)
         self.pushButton_2.pressed.connect(self.recording.stopRecording)
+        self.pushButton_3.pressed.connect(filePath.openLoc)
 
         self.recording.createFolder()
         self.recording.recordLocation()
