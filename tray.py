@@ -6,7 +6,7 @@ from recording import *
 
 
 def systemTray(onLive):
-    path = os.path.abspath(os.path.dirname(__file__))
+    path = os.path.abspath(os.path.dirname(__file__) + "\\ico")
     ico_folder = os.path.expanduser(path)
 
     def after_click(icon, query):
