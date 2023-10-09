@@ -46,8 +46,8 @@ class Recording:
         self.main_window.pushButton_2.show()
 
         resolution = (self.width, self.height)
-        codec = cv2.VideoWriter_fourcc(*"XVID")
-        filename = f"{self.prefName}" + '.mp4'
+        codec = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
+        filename = f"{self.prefName}" + '.avi'
 
         self.out = cv2.VideoWriter(filename, codec, 20.0, resolution)
         self.timer.start(1000)
