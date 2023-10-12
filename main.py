@@ -27,6 +27,9 @@ class RecordingGUI(QMainWindow, recorderUI.Ui_MainWindow):
         self.recording.createFolder()
         self.recording.recordLocation()
 
+        self.btn_SaveLocation.pressed.connect(self.recording.folderLocation)
+        self.ln_Location.textEdited.connect(self.recording.folderLocation)
+
 
 def main():
     app = QApplication(sys.argv)
