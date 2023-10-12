@@ -16,6 +16,13 @@ class Recording:
         self.timer.timeout.connect(self.updateTimer)
         self.out = None
 
+    def folderLocation(self):
+        text = self.main_window.ln_Location.text()
+
+        record_folder = os.path.expanduser(text)
+        path = os.path.join(record_folder)
+        os.chdir(path)
+
     def createFolder(self):
         record_folder = os.path.expanduser("~\\Documents\\Records")
         if not os.path.exists(record_folder):
