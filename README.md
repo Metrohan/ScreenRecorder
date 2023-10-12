@@ -11,6 +11,7 @@ Screen recorder app for Windows. Made with Python, PyQt5, OpenCV, QtDesigner.
 - Press the 'REC' button
 - Wait for 5 seconds, recording starts, and a monitor shows up
 - to stop the recording, you can press the stop button or press 'P' on monitor
+- you can change the record location
 
 ### You must choice a resolution and pick a name for your record. Unless recorder will crash!
 
@@ -29,6 +30,8 @@ Screen recorder app for Windows. Made with Python, PyQt5, OpenCV, QtDesigner.
 - If you don't choose a resolution and record name, program will crash.
 
 - Sometimes the stop button doesn't work. You must press 'P' on monitor.
+
+- If you try to change file path for two times, prgoram will crash.
 
 # Credits
 
