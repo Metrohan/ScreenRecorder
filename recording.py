@@ -6,7 +6,6 @@ import time
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QTimer
-from tray import systemTray
 
 
 class Recording:
@@ -17,19 +16,13 @@ class Recording:
         self.timer.timeout.connect(self.updateTimer)
         self.out = None
 
-    def trayInit(self):
-        self.onLive = False
-        systemTray(self.onLive)
-
     def createFolder(self):
         record_folder = os.path.expanduser("~\\Documents\\Records")
-        print(record_folder)
         if not os.path.exists(record_folder):
             os.mkdir(record_folder)
 
     def recordLocation(self):
         self.record_folder = os.path.expanduser("~\\Documents\\Records")
-        print(self.record_folder)
         path = os.path.join(self.record_folder)
         os.chdir(path)
 
@@ -51,20 +44,16 @@ class Recording:
 
         self.out = cv2.VideoWriter(filename, codec, 20.0, resolution)
         self.timer.start(1000)
-        systemTray(self.onLive)
-        try:
-            while self.onLive:
-                img = pyautogui.screenshot()
-                frame = np.array(img)
-                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                self.out.write(frame)
-                cv2.imshow('Monitor', frame)
-                if cv2.waitKey(1) == ord('p'):
-                    self.onLive = 0
-                    self.stopRecording()
-                    break
-        except Exception as e:
-            print("döngüye girilmedi hata: ", e)
+        while self.onLive:
+            img = pyautogui.screenshot()
+            frame = np.array(img)
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            self.out.write(frame)
+            cv2.imshow('Monitor', frame)
+            if cv2.waitKey(1) == ord('p'):
+                self.onLive = 0
+                self.stopRecording()
+                break
 
     def stopRecording(self):
         self.startTimer = 0
@@ -77,8 +66,6 @@ class Recording:
 
         self.main_window.pushButton.show()
         self.main_window.pushButton_2.hide()
-
-        systemTray(self.onLive)
 
     def updateTimer(self):
         if self.onLive:
