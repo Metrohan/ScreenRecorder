@@ -844,10 +844,10 @@
     </property>
     <property name="font">
      <font>
-      <family>DS-Digital</family>
+      <family>Corbel</family>
       <pointsize>26</pointsize>
       <weight>75</weight>
-      <italic>true</italic>
+      <italic>false</italic>
       <bold>true</bold>
      </font>
     </property>
@@ -999,7 +999,7 @@
       <x>200</x>
       <y>60</y>
       <width>47</width>
-      <height>51</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="palette">
@@ -1068,10 +1068,10 @@
     </property>
     <property name="font">
      <font>
-      <family>DS-Digital</family>
+      <family>Corbel</family>
       <pointsize>26</pointsize>
       <weight>75</weight>
-      <italic>true</italic>
+      <italic>false</italic>
       <bold>true</bold>
      </font>
     </property>
