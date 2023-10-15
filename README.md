@@ -13,7 +13,7 @@ Screen recorder app for Windows. Made with Python, PyQt5, OpenCV, QtDesigner.
 - to stop the recording, you can press the stop button or press 'P' on monitor
 - you can change the record location
 
-### You must choice a resolution and pick a name for your record. Unless recorder will crash!
+### You must choose a resolution and pick a name for your record. Unless recorder will crash!
 
 # Todo
 
