@@ -11,18 +11,18 @@ class RecordingGUI(QMainWindow, recorderUI.Ui_MainWindow):
 
         self.setupUi(self)
         self.show()
-        self.setFixedSize(475, 400)
+        self.setFixedSize(520, 350)
 
         self.recording = recording.Recording(self)
 
         self.comboBox.currentIndexChanged.connect(self.recording.initVideoWriter)
-        self.lineEdit.textEdited.connect(self.recording.initVideoWriter)
+        self.nameEdit.textEdited.connect(self.recording.initVideoWriter)
 
-        self.pushButton.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid red; ")
-        self.pushButton_2.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid green; ")
-        self.pushButton.pressed.connect(self.recording.countdown)
-        self.pushButton_2.pressed.connect(self.recording.stopRecording)
-        self.pushButton_3.pressed.connect(filePath.openLoc)
+        self.startButton.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid red; ")
+        self.stopButton.setStyleSheet("background-color :#424242; border-radius : 50; border: 5px solid green; ")
+        self.startButton.pressed.connect(self.recording.countdown)
+        self.stopButton.pressed.connect(self.recording.stopRecording)
+        self.chooseLoc.pressed.connect(self.recording.choose_file_location)
 
         self.recording.createFolder()
         self.recording.recordLocation()
