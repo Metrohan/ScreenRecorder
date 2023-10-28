@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
-    <height>382</height>
+    <width>515</width>
+    <height>365</height>
    </rect>
   </property>
   <property name="palette">
@@ -136,8 +136,8 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>250</y>
-      <width>111</width>
+      <y>160</y>
+      <width>131</width>
       <height>22</height>
      </rect>
     </property>
@@ -395,8 +395,13 @@
      </palette>
     </property>
     <property name="currentText">
-     <string>640x480</string>
+     <string>Choose a resolution...</string>
     </property>
+    <item>
+     <property name="text">
+      <string>Choose a resolution...</string>
+     </property>
+    </item>
     <item>
      <property name="text">
       <string>640x480</string>
@@ -468,10 +473,10 @@
      </property>
     </item>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="startButton">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>400</x>
       <y>10</y>
       <width>101</width>
       <height>101</height>
@@ -535,7 +540,7 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>250</y>
+      <y>160</y>
       <width>81</width>
       <height>21</height>
      </rect>
@@ -647,7 +652,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>290</y>
+      <y>220</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -699,10 +704,10 @@
      <string>Record Name</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="stopButton">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>400</x>
       <y>10</y>
       <width>101</width>
       <height>101</height>
@@ -759,20 +764,23 @@
      <string>STOP</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="nameEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>290</y>
-      <width>113</width>
+      <y>220</y>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="timer">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>250</x>
       <y>-10</y>
       <width>141</width>
       <height>81</height>
@@ -858,7 +866,7 @@
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>240</x>
       <y>10</y>
       <width>141</width>
       <height>41</height>
@@ -916,7 +924,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>481</width>
+      <width>521</width>
       <height>121</height>
      </rect>
     </property>
@@ -967,7 +975,7 @@
    <widget class="QTextEdit" name="textEdit_3">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>320</x>
       <y>60</y>
       <width>61</width>
       <height>51</height>
@@ -980,23 +988,10 @@
      <set>Qt::NoTextInteraction</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QLabel" name="countdown">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>80</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>File Location</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
+      <x>340</x>
       <y>60</y>
       <width>47</width>
       <height>41</height>
@@ -1079,18 +1074,50 @@
      <string>5</string>
     </property>
    </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>201</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0">
+      <widget class="QPushButton" name="chooseLoc">
+       <property name="text">
+        <string>Choose location...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLineEdit" name="locLineEdit">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Choose or enter a location</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
    <zorder>textEdit_2</zorder>
    <zorder>textEdit</zorder>
-   <zorder>pushButton_2</zorder>
+   <zorder>stopButton</zorder>
    <zorder>comboBox</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>startButton</zorder>
    <zorder>label</zorder>
    <zorder>label_5</zorder>
-   <zorder>lineEdit</zorder>
-   <zorder>label_2</zorder>
+   <zorder>nameEdit</zorder>
+   <zorder>timer</zorder>
    <zorder>textEdit_3</zorder>
-   <zorder>pushButton_3</zorder>
-   <zorder>label_3</zorder>
+   <zorder>countdown</zorder>
+   <zorder>gridLayoutWidget</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
