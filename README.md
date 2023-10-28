@@ -3,7 +3,8 @@ Screen recorder app for Windows. Made with Python, PyQt5, OpenCV, QtDesigner.
 
 # Instructions
 
-![Alt text](image.png)
+![Screenshot 2023-10-28 202404](https://github.com/Metrohan/ScreenRecorder/assets/54481595/f0be2c52-d11f-4574-9d8a-8d468cdb3d89)
+
 
 - Choose a resolution
 - Type a name for your record
