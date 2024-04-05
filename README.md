@@ -35,7 +35,7 @@ Screen recorder app for Windows. Made with Python, PyQt5, OpenCV, QtDesigner.
 ![Static Badge](https://img.shields.io/badge/Pyinstaller-blue?color=blue&link=https%3A%2F%2Fpyinstaller.org) ![Static Badge](https://img.shields.io/badge/opencv-blue?link=https%3A%2F%2Fopencv.org%2F)
  ![Static Badge](https://img.shields.io/badge/pyqt-brightgreen?link=https%3A%2F%2Fpypi.org%2Fproject%2FPyQt5%2F) ![Static Badge](https://img.shields.io/badge/qtdesigner-green?link=https%3A%2F%2Fwww.qt.io%2Fdownload-open-source)
 
- Special thanks to the Haeydra for him support
+ Special thanks to the Haeydra for his support
 
 
 
