@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QCheckBox
 import filePath
 import recorderUI
 import recording
@@ -14,6 +14,18 @@ class RecordingGUI(QMainWindow, recorderUI.Ui_MainWindow):
         self.setFixedSize(520, 350)
 
         self.recording = recording.Recording(self)
+
+        # startButton and stopButton share the same geometry (see
+        # recorderUI.py) and stopButton is created after startButton, so
+        # without hiding it here it sits on top and is the button users
+        # actually click first - stopRecording() then runs before any
+        # recording has started.
+        self.stopButton.hide()
+
+        self.previewCheckBox = QCheckBox("Show preview window", self.centralwidget)
+        self.previewCheckBox.setGeometry(20, 260, 220, 20)
+        self.previewCheckBox.setStyleSheet("color: white;")
+        self.previewCheckBox.setChecked(True)
 
         self.comboBox.currentIndexChanged.connect(self.recording.initVideoWriter)
         self.nameEdit.textEdited.connect(self.recording.initVideoWriter)
